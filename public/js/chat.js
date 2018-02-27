@@ -40,7 +40,7 @@ socket.on('updateUserList', function(users) {
     users.forEach(function(user) {
         ol.append($('<li></li>').text(user));
     });
-    
+
     $('#users').html(ol);
 })
 
@@ -70,19 +70,18 @@ socket.on('newLocationMessage', function(message) {
     scrollToBottom();
 })
 
-jQuery('#message-form').on('submit', function(e) {
+$('#message-form').on('submit', function(e) {
     e.preventDefault();
-    var messageTextBox = jQuery('[name=message]');
+    var messageTextBox = $('[name=message]');
 
     socket.emit('createMessage', {
-        from: 'User',
         text: messageTextBox.val()
     }, function () {
         messageTextBox.val('');
     });
 });
 
-var locationButton = jQuery('#send-location');
+var locationButton = $('#send-location');
 locationButton.on('click', function() {
     if (!navigator.geolocation) {
         return alert('Geolocation is not supported by your browser.');
